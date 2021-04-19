@@ -1,0 +1,6 @@
+.loc {
+  /* margin-left: 200px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

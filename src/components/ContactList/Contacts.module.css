@@ -1,0 +1,9 @@
+.listStyle {
+  text-decoration: none;
+  list-style: none;
+}
+li {
+  text-align: center;
+  list-style: none;
+  color: white;
+}

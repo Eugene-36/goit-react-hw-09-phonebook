@@ -1,0 +1,24 @@
+h1,
+h2,
+h3,
+h4 {
+  color: #333;
+}
+button {
+  padding: 10px 30px;
+  background: #f8a035;
+  color: #fff;
+  border: none;
+}
+input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+}
+.fr {
+  margin-top: 100px;
+  display: inline-block;
+  flex-direction: column;
+  text-align: center;
+}
