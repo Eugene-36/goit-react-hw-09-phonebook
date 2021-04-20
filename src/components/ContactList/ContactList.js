@@ -1,33 +1,43 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { v4 as unId } from "uuid";
 import Contacts from "./Contacts.module.css";
-import { connect } from "react-redux";
+
 import { todosOperations, visibleSelectors } from "../../redux/actions/index";
+import { useDispatch, useSelector } from "react-redux";
 
-const ContactList = ({ allUsers, onDelete }) => (
-  <ul className="TodoList">
-    {allUsers.map(({ id, name, number }) => (
-      <li key={unId()} className="listStyle">
-        <p className="TodoList__text">
-          {name}:{number}
-        </p>
-        <button
-          type="button"
-          className="TodoList__btn"
-          onClick={() => onDelete(id)}
-        >
-          Remove
-        </button>
-      </li>
-    ))}
-  </ul>
-);
+// const mapStateToProps = (state) => ({
+//   allUsers: visibleSelectors.getVisibleContacts(state),
+// });
 
-const mapStateToProps = (state) => ({
-  allUsers: visibleSelectors.getVisibleContacts(state),
-});
+// const mapDispatchToProps = {
+//   onDelete: (id) => todosOperations.deleteTodo(id),
+// };
 
-const mapDispatchToProps = {
-  onDelete: (id) => todosOperations.deleteTodo(id),
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+// allUsers, onDelete
+export default function ContactList() {
+  const dispatch = useDispatch();
+  const allUsers = useSelector(visibleSelectors.getVisibleContacts);
+  const deleteContact = useCallback(
+    (id) => dispatch(todosOperations.deleteTodo(id)),
+    [dispatch]
+  );
+
+  return (
+    <ul className="TodoList">
+      {allUsers.map(({ id, name, number }) => (
+        <li key={unId()} className="listStyle">
+          <p className="TodoList__text">
+            {name}:{number}
+          </p>
+          <button
+            type="button"
+            className="TodoList__btn"
+            onClick={() => deleteContact(id)}
+          >
+            Remove
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
